@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import importlib
+import random
 from datetime import datetime
 
 from weather.sojson import get_today_weather
@@ -22,7 +23,7 @@ def get_dictum_info(channel):
     :return:str
     """
     if not channel:
-        return None
+        channel = random.randint(1,5)
     source = DICTUM_NAME_DICT.get(channel, '')
     if source:
         addon = importlib.import_module('onewords.' + source, __package__)

@@ -83,7 +83,7 @@ def text_reply(msg):
             time.sleep(1)  # 休眠一秒，保安全，想更快的，可以直接用。
             if reply_text:  # 如内容不为空，回复消息
                 if msg['ToUserName'] == FILEHELPER:
-                    reply_text = '机器人自动回复：{}'.format(reply_text)
+                    reply_text = '{}'.format(reply_text)
                     itchat.send(reply_text, toUserName=FILEHELPER)
                     print('\n我发出信息：{}\n回复{}：'
                           .format(receive_text, reply_text))
@@ -130,7 +130,7 @@ def send_alarm_msg():
         weather = get_weather_info(gf.get('city_name'))
         diff_time = get_diff_time(gf.get('start_date'))
         sweet_words = gf.get('sweet_words')
-        send_msg = '\n'.join(x for x in [dictum, weather, diff_time, sweet_words] if x)
+        send_msg = '\n\n'.join(x for x in [dictum, weather, diff_time, sweet_words] if x)
         # print(send_msg)
 
         if not send_msg or not is_online():continue

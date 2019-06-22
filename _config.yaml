@@ -14,7 +14,7 @@ bot_channel: 2
 #图灵机器人(http://www.tuling123.com/)免费用户每天可用 100 条。
 #请在官网注册并申请 apikey ,userID。
 turing_conf:
-  apiKey: ''
+  apiKey: '8217ec7431ad44759161cdc6a87a29cf'
 
 
 # 一个 Al (http://www.yige.ai/),这个功能挺多的，朋友们自行申请，训练。
@@ -26,7 +26,6 @@ yigeai_conf:
 # - '好友1'
 # - '好友2'
 auto_reply_names:
-  - '古典'
   - '文件传输助手'
 
 
@@ -35,26 +34,26 @@ alarm_info:
   #True 开启定时提醒，False 关闭
   is_alarm: True
   #定时发送时间
-  alarm_timed: '19:00'
+  alarm_timed: '12:45'
 
 girlfriend_infos:
   - #女友微信昵称或者备注名，不能输入微信号。（如填：文件传输助手，发消息到文件传输助手，测试效果）
-    wechat_name: '文件传输助手'
+    wechat_name: '🥰女神'
     #女友所在城市，用于发送天气。（可空）
-    city_name: '桂林'
+    city_name: '北京'
     # 格言渠道（1 : ONE●一个，2 : 词霸（每日英语，双语）4 : 一言，5：笑话)(可空)
-    dictum_channel : 2
+    dictum_channel : 3
     # 从那天开始勾搭的(最终效果为：宝贝这是我们在一起的第 111 天)（可空）
-    start_date: '2017-10-10'
+    start_date: '2013-1-16'
     # 后缀（可空）
     sweet_words: '来自最爱你的我。'
 
 #  如果你有多个好友需要发送，则参照这个样式，复制即可
 #  如不需要，则删除或注解下面所有的数据
-  - group_name: 'EverydayWechat 交流群' # 群聊名称，必须要把需要的群聊保存到通讯录。
-    city_name: '漳州'
-    dictum_channel : 4
-    start_date: '2019-6-15'
-    sweet_words: '来自帅气的群主。'
+  # - group_name: 'EverydayWechat 交流群' # 群聊名称，必须要把需要的群聊保存到通讯录。
+  #   city_name: '漳州'
+  #   dictum_channel : 4
+  #   start_date: '2019-6-15'
+  #   sweet_words: '来自帅气的群主。'
 
 
