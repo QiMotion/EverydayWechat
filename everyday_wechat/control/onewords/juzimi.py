@@ -29,7 +29,9 @@ def get_zsh_info():
         url = 'https://www.juzimi.com/{}?page={}'.format(apdix[0], random.randint(1, apdix[1]))
         # print(url)
         resp = HTMLSession().get(url)
+
         if resp.status_code == 200:
+            # print(resp.html)
             results = resp.html.find('a.xlistju')
             if results:
                 re_text = random.choice(results).text
@@ -47,5 +49,4 @@ if __name__ == '__main__':
     for _ in range(15):
         ow = get_one_words()
         print(ow)
-        print()
 

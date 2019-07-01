@@ -7,8 +7,10 @@
 """
 
 from everyday_wechat.utils.common import SPIDER_HEADERS
+from functools import reduce
 import requests
 from bs4 import BeautifulSoup
+import re
 
 
 XZW_BASE_URL = "https://www.xzw.com/fortune/"
@@ -27,12 +29,28 @@ constellation_dict = {
     "双鱼座": "pisces",
 }
 
+
 def get_constellation(month, day):
-    m = 0
+
     n = ('摩羯座', '水瓶座', '双鱼座', '白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座')
     d = ((1, 20), (2, 19), (3, 21), (4, 21), (5, 21), (6, 22), (7, 23), (8, 23), (9, 23), (10, 23), (11, 23), (12, 23))
-    for i in filter(lambda y: y <= (month, day), d): m += 1
+
+    # 第一
+    # m = 0
+    # for i in filter(lambda y: y <= (month, day), d): m += 1
+
+    # 第二
+    m = reduce(lambda x, y: (x + 1) if y <= (month, day) else x, d, 0)
+    print(n[m % 12])
+
+    # 第三
+    for i, x in enumerate(d):
+        if x > (month, day):
+            return n[i % 12]
+    return n[0]
+
     return n[m % 12]
+
 
 def get_xzw_data_list(constellation_name):
     ret = []
@@ -101,9 +119,40 @@ def get_xzw_text(birthday_str):
     return resp
 
 
+def get_xzw_horoscope(name):
+    '''
+    获取星座屋(https://www.xzw.com)的星座运势
+    :param name: 星座名称
+    :return:
+    '''
+    if not name in constellation_dict:
+        print('星座输入有误')
+        return
+    try:
+        const_code = constellation_dict[name]
+        req_url = XZW_BASE_URL + const_code
+        resp = requests.get(req_url, headers=SPIDER_HEADERS)
+        if resp.status_code == 200:
+            html = resp.text
+            lucky_num = re.findall(r'<label>幸运数字：</label>(.*?)</li>', html)[0]
+            lucky_color = re.findall(r'<label>幸运颜色：</label>(.*?)</li>', html)[0]
+            detail_horoscope = re.findall(r'<p><strong class="p1">.*?</strong><span>(.*?)</span></p>', html)[0]
+            return_text = '{name}今日运势\n【幸运颜色】{color}\n【幸运数字】{num}\n【综合运势】{horoscope}'.format(
+                name=name,
+                color=lucky_color,
+                num=lucky_num,
+                horoscope=detail_horoscope
+            )
+            return return_text
+    except Exception as exception:
+        print(str(exception))
+
+
+get_today_horoscope = get_xzw_horoscope
+
 
 if __name__ == '__main__':
-    print(get_xzw_text("01-22"))
-
-
+    # print (get_constellation(3, 10))
+    # print(get_xzw_text("03-18"))
+    print(get_xzw_horoscope("水瓶座"))
 
