@@ -1,24 +1,31 @@
 # coding=utf-8
-
+"""
+获取各种请求的调度管理中心
+"""
 import importlib
 import random
 import re
 from datetime import datetime
 
-from everyday_wechat.control.weather.rtweather import get_today_weather
+# from everyday_wechat.control.weather.rtweather import get_today_weather
 from everyday_wechat.control.weather.sojson import get_sojson_weather
 from everyday_wechat.utils.common import (
     WEEK_DICT,
     get_constellation_name,
 )
 from everyday_wechat.utils import config
-
 from everyday_wechat.control.horoscope.xzw_horescope import get_today_horoscope
 from everyday_wechat.control.calendar.sojson_calendar import get_sojson_calendar
 
-DICTUM_NAME_DICT = {1: 'wufazhuce', 2: 'acib', 3: 'lovelive', 4: 'hitokoto', 5: 'rtjokes', 6: 'juzimi', 7: 'caihongpi'}
-BOT_NAME_DICT = {1: 'tuling123', 2: 'yigeai', 3: 'qingyunke'}
-# 用于星座的正则
+DICTUM_NAME_DICT = {
+    1: 'wufazhuce', 2: 'acib', 3: 'lovelive', 4: 'hitokoto',
+    5: 'rtjokes', 6: 'juzimi', 7: 'caihongpi'
+}
+BOT_NAME_DICT = {
+    1: 'tuling123', 2: 'yigeai', 3: 'qingyunke', 4: 'qq_nlpchat',
+    5: 'tian_robot', 6: 'ruyiai'
+}
+# 用于星座的正则表达式
 BIRTHDAY_COMPILE = re.compile(r'\-?(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$')
 
 
@@ -52,14 +59,15 @@ def get_weather_info(cityname):
 
 def get_bot_info(message, userId=''):
     """
-    获取自动回复的话。
+    跟机器人互动
     # 优先获取图灵机器人API的回复，但失效时，会使用青云客智能聊天机器人API(过时)
     :param message:str, 发送的话
-    :return:str, 回复的话
+    :param userId: str, 好友的uid，作为请求的唯一标识。
+    :return:str, 机器人回复的话。
     """
-    channel = config.get('bot_channel', 3)
-    # channel = get_yaml().get('', 3)
+    channel = config.get('auto_relay_info').get('bot_channel', 3)
     source = BOT_NAME_DICT.get(channel, 'qingyunke')
+    # print(source)
     if source:
         addon = importlib.import_module('everyday_wechat.control.bot.' + source, __package__)
         reply_msg = addon.get_auto_reply(message, userId)
@@ -122,7 +130,7 @@ def get_calendar_info(alldata=True):
 
 
 if __name__ == '__main__':
-    text = 'are you ok'
-    reply_msg = get_bot_info(text)
-    print(reply_msg)
+    # text = 'are you ok'
+    # reply_msg = get_bot_info(text)
+    # print(reply_msg)
     pass
