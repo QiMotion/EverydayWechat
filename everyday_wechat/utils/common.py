@@ -4,11 +4,19 @@
 """
 import re
 import hashlib
-from simplejson import JSONDecodeError
+import json
+
+__all__ = [
+    'FILEHELPER_MARK', 'FILEHELPER', 'SPIDER_HEADERS', 'WEEK_DICT',
+    'BIRTHDAY_COMPILE', 'CONSTELLATION_NAME_LIST', 'CONSTELLATION_DATE_DICT',
+    'is_json', 'md5_encode', 'get_constellation_name']
+
+FILEHELPER_MARK = ['文件传输助手', 'filehelper']  # 文件传输助手标识
+FILEHELPER = 'filehelper'
 
 SPIDER_HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/67.0.3396.87 Safari/537.36',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; '
+                  'WOW64; rv:60.0) Gecko/20100101 Firefox/60.0',
 }
 
 WEEK_DICT = {
@@ -38,6 +46,8 @@ CONSTELLATION_DATE_DICT = {
     (12, 23): '射手座',
     (12, 32): '摩羯座',
 }
+
+
 def is_json(resp):
     """
     判断数据是否能被 Json 化。 True 能，False 否。
@@ -45,14 +55,17 @@ def is_json(resp):
     :return: bool, True 数据可 Json 化；False 不能 JOSN 化。
     """
     try:
-        resp.json()
+        json.loads(resp.text)
         return True
-    except JSONDecodeError:
+    except AttributeError as error:
         return False
+    return False
 
 
 def md5_encode(text):
     """ 把數據 md5 化 """
+    if not isinstance(text, str):
+        text = str(text)
     md5 = hashlib.md5()
     md5.update(text.encode('utf-8'))
     encodedStr = md5.hexdigest().upper()
@@ -76,10 +89,10 @@ def get_constellation_name(date):
         month, day = int(times[0][0]), int(times[0][1])
         for k, v in CONSTELLATION_DATE_DICT.items():
             if k > (month, day):
-                # print(v)
                 return v
     return None
 
+
 if __name__ == '__main__':
-    # print (md5_encode('0'))
+    print(md5_encode('aeryou'))
     pass

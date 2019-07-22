@@ -19,7 +19,10 @@ from everyday_wechat.utils.common import (
 )
 from everyday_wechat.utils import config
 
+__all__ = ['get_nlp_textchat']
+
 URL = 'https://api.ai.qq.com/fcgi-bin/nlp/nlp_textchat'
+
 
 def get_nlp_textchat(text, userId):
     """
@@ -32,7 +35,7 @@ def get_nlp_textchat(text, userId):
     try:
 
         # config.init()
-        info = config.get('auto_relay_info')['qqnlpchat_conf']
+        info = config.get('auto_reply_info')['qqnlpchat_conf']
         app_id = info['app_id']
         app_key = info['app_key']
         if not app_id or not app_key:
@@ -44,10 +47,10 @@ def get_nlp_textchat(text, userId):
             string.ascii_letters + string.digits, random.randint(10, 16)))
         time_stamp = int(time.time())  # 时间戳
         params = {
-            'app_id': app_id, # 应用标识
-            'time_stamp': time_stamp, # 请求时间戳（秒级）
-            'nonce_str': nonce_str, # 随机字符串
-            'session': md5_encode(userId), # 会话标识
+            'app_id': app_id,  # 应用标识
+            'time_stamp': time_stamp,  # 请求时间戳（秒级）
+            'nonce_str': nonce_str,  # 随机字符串
+            'session': md5_encode(userId),  # 会话标识
             'question': text  # 用户输入的聊天内容
         }
         # 签名信息
@@ -84,6 +87,7 @@ def getReqSign(parser, app_key):
     # print('sign =', sign_str.strip())
     hash_md5 = hashlib.md5(sign_str.encode("UTF-8"))
     return hash_md5.hexdigest().upper()
+
 
 get_auto_reply = get_nlp_textchat
 

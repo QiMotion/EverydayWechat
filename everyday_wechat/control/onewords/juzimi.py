@@ -5,7 +5,10 @@
 Author: ClaireYiu(https://github.com/ClaireYiu)
 """
 import random
-from requests_html import HTMLSession
+import requests
+
+
+# from requests_html import HTMLSession
 
 
 def get_zsh_info():
@@ -19,24 +22,25 @@ def get_zsh_info():
     print('正在获取民国情话...')
     try:
         name = [
-            ['writer/朱生豪', 38,],
+            ['writer/朱生豪', 38, ],
             ['article/爱你就像爱生命', 22],
             ['article/25637', 55],
-                ]
+        ]
         apdix = random.choice(name)
         # page 从零开始计数的。
         url = 'https://www.juzimi.com/{}?page={}'.format(
             apdix[0], random.randint(1, apdix[1]))
         # print(url)
-        resp = HTMLSession().get(url)
+        resp = requests.get(url)
         if resp.status_code == 200:
             # print(resp.html)
-            results = resp.html.find('a.xlistju')
-            if results:
-                re_text = random.choice(results).text
-                if re_text and '\n\n' in re_text:
-                    re_text = re_text.replace('\n\n','\n')
-                return re_text
+            # results = resp.find('a.xlistju')
+            # if results:
+            #     re_text = random.choice(results).text
+            #     if re_text and '\n\n' in re_text:
+            #         re_text = re_text.replace('\n\n','\n')
+            #     return re_text
+            return None
         print('获取民国情话失败..')
     except Exception as exception:
         print(exception)

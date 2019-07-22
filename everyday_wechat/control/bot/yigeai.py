@@ -11,6 +11,8 @@ from everyday_wechat.utils.common import (
 
 from everyday_wechat.utils import config
 
+__all__ = ['get_yigeai']
+
 # 一个AI错误集合
 TULING_ERROR_CODE_LIST = ('501', '502', '503', '504', '507', '510')
 
@@ -25,7 +27,7 @@ def get_yigeai(text, userid):
     """
     try:
         # config.init()
-        info = config.get('auto_relay_info')['yigeai_conf']
+        info = config.get('auto_reply_info')['yigeai_conf']
         token = info['client_token']
         if not token:
             print('一个「AI」token 为空,请求出错')
@@ -33,8 +35,8 @@ def get_yigeai(text, userid):
         session_id = md5_encode(userid if userid else '250')
 
         # print('发出的消息:{}'.format(text))
-        resp = requests.post('http://www.yige.ai/v1/query',
-                             data={'token': token, 'query': text, 'session_id': session_id})
+        data = {'token': token, 'query': text, 'session_id': session_id}
+        resp = requests.post('http://www.yige.ai/v1/query', data=data)
         if resp.status_code == 200 and is_json(resp):
             # print(resp.text)
             re_data = resp.json()

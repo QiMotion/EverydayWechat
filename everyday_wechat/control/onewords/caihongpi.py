@@ -5,6 +5,9 @@ https://chp.shadiao.app/?from_nmsl
  """
 import requests
 
+__all__ = ['get_caihongpi_info']
+
+
 def get_caihongpi_info():
     """
     彩虹屁生成器
@@ -20,6 +23,7 @@ def get_caihongpi_info():
         print(exception)
         # return None
     # return None
+
 
 get_one_words = get_caihongpi_info
 
