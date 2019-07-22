@@ -133,8 +133,8 @@ def send_alarm_msg(key):
     dictum = get_dictum_info(gf.get('dictum_channel'))
     diff_time = get_diff_time(gf.get('start_date'), gf.get('start_date_msg'))
     sweet_words = gf.get('sweet_words')
-    send_msg = '\n'.join(
-        x for x in [calendar_info, weather, horoscope, dictum, diff_time, sweet_words] if x)
+
+    send_msg = '\n\n'.join(x for x in [calendar_info, weather, horoscope, dictum, diff_time, sweet_words] if x)
     # print('\n' + send_msg + '\n')
     if not send_msg or not is_online(): return
     uuid_list = gf.get('uuid_list')
