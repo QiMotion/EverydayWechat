@@ -45,7 +45,7 @@ def handle_friend(msg):
         reply_text = get_bot_info(receive_text, uuid)  # 获取自动回复
         if reply_text:  # 如内容不为空，回复消息
             time.sleep(random.randint(1, 2))  # 休眠一秒，保安全。想更快的，可以直接注释。
-            reply_text = reply_text if not uuid == FILEHELPER else '机器人回复：' + reply_text
+            reply_text = reply_text if not uuid == FILEHELPER else '' + reply_text
             itchat.send(reply_text, toUserName=uuid)
             print('回复{}：{}'.format(nick_name, reply_text))
         else:
