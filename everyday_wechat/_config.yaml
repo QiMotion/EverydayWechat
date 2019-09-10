@@ -22,8 +22,8 @@ auto_reply_info:
   auto_reply_black_list:
     - '贴心小秘书'
 
-  # 机器人渠道（1: 图灵机器人，2: 一个AI ,3 : 青云客，4 腾讯智能闲聊，5:天行机器人,6 海知智能)
-  bot_channel: 4
+  # 机器人渠道（1: 图灵机器人，2: 一个AI ,3 : 青云客，4 腾讯智能闲聊，5:天行机器人,6 海知智能,7 思知机器人)
+  bot_channel: 7
 
   #图灵机器人(http://www.tuling123.com/) 实名后的用户每天免费可用 100 条。
   turing_conf:
@@ -69,6 +69,8 @@ alarm_info:
         - '🥰女神'
       # 注意：必须要把需要的群聊保存到通讯录
       alarm_timed:
+        - "00:15"
+        - "22:55"
         - "21:20"
         - "19:40"
         - "20:00"
@@ -118,10 +120,8 @@ group_helper_conf:
 
   # 黑名单用户。当 is_all ：True 。这个群里的用户不受影响。
   group_name_black_list:
-    - 'EverydayWechat 交流1群'
-    - 'EverydayWechat 交流2群'
 
-  is_at: False # 艾特标记。只有当别人艾特机器人，才会处理消息（慎重关闭！）
+  is_at: True # 艾特标记。只有当别人艾特机器人，才会处理消息（慎重关闭！）
   is_auto_reply: True # 开启群自动回复（慎重开启！）
   is_weather: True # 是否开启天气查询
   is_calendar: True # 是否开启万历年查询
