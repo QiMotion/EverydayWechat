@@ -3,6 +3,8 @@
 import requests
 import json
 import os
+from datetime import datetime
+from datetime import timedelta
 
 __all__ = ['get_sojson_weather', 'get_sojson_weather_tomorrow']
 
@@ -53,6 +55,12 @@ def get_sojson_weather(city_name, is_tomorrow=False):
 
                 today_weather = weather_dict.get('data').get('forecast')[0]
 
+                today_date = datetime.now().strftime('%Y-%m-%d')
+                # 这个天气的接口更新不及时，有时候当天1点的时候，还是昨天的天气信息，如果天气不一致，则取下一天(今天)的数据
+                weather_today = today_weather['ymd']
+                if today_date != weather_today:
+                    today_weather = weather_dict.get('data').get('forecast')[1]
+
                 weather_info = MSG_TODAY.format(
                     city_name=city_name,
                     _date=today_weather['ymd'],
@@ -70,6 +78,7 @@ def get_sojson_weather(city_name, is_tomorrow=False):
     except Exception as exception:
         print(str(exception))
         return None
+
 
 
 def get_sojson_weather_tomorrow(city_name):
@@ -95,7 +104,11 @@ def get_sojson_weather_tomorrow(city_name):
             if weather_dict.get('status') == 200:
 
                 today_weather = weather_dict.get('data').get('forecast')[1]
-
+                today_date = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
+                # 这个天气的接口更新不及时，有时候当天1点的时候，还是昨天的天气信息，如果天气不一致，则取下一天(今天)的数据
+                weather_today = today_weather['ymd']
+                if today_date != weather_today:
+                    today_weather = weather_dict.get('data').get('forecast')[2]
                 # MSG_TOMORROW = '明日天气预报\n{city_name},{_date},{week}\n【明日天气】{_type}\n
                 # 【明日温度】{low_temp} {high_temp}\n【明日风速】{speed}\n【出行提醒】{notice}'
 
@@ -121,7 +134,7 @@ def get_sojson_weather_tomorrow(city_name):
 get_today_weather = get_sojson_weather
 
 if __name__ == '__main__':
-    is_tomorrow = False
+    is_tomorrow = True
     we = get_sojson_weather('青岛', is_tomorrow)
     print(we)
-    pass
+    # pass

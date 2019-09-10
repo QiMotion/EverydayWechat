@@ -36,9 +36,11 @@ from everyday_wechat.utils.friend_helper import (
 
 __all__ = ['run']
 
+
 def run():
     """ 主运行入口 """
     # 判断是否登录，如果没有登录则自动登录，返回 False 表示登录失败
+    print('开始登录...')
     if not is_online(auto_login=True):
         return
 
@@ -49,8 +51,6 @@ def is_online(auto_login=False):
     :param auto_login: bool,当为 Ture 则自动重连(默认为 False)。
     :return: bool,当返回为 True 时，在线；False 已断开连接。
     """
-
-    # print('i am here..')
 
     def _online():
         """
@@ -103,6 +103,8 @@ def init_data():
     if alarm_dict:
         init_alarm(alarm_dict)  # 初始化定时任务
 
+    print('初始化完成，开始正常工作。')
+
 
 def init_alarm(alarm_dict):
     """
@@ -115,7 +117,7 @@ def init_alarm(alarm_dict):
         scheduler.add_job(send_alarm_msg, 'cron', [key], hour=value['hour'],
                           minute=value['minute'], id=key, misfire_grace_time=600)
     scheduler.start()
-    print('已开启定时发送提醒功能...')
+    # print('已开启定时发送提醒功能...')
     # print(scheduler.get_jobs())
 
 
