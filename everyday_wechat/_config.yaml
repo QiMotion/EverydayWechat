@@ -20,15 +20,13 @@ auto_reply_info:
 
   # 白名单，is_auto_reply_all: False 生效。此名单的用户才可自动回复。（填：文件传输助手，可回复自己，测试效果）
   auto_reply_white_list:
-    - '诗风'
     - '文件传输助手'
 
   # 黑名单，is_auto_reply_all:True 生效。此名单不会自动回复。
   auto_reply_black_list:
-    - '贴心小秘书'
 
   # 机器人渠道（1: 图灵机器人，2: 一个AI ,3 : 青云客，4 腾讯智能闲聊，5:天行机器人,6 海知智能,7 思知机器人)
-  bot_channel: 7
+  bot_channel: 6
 
   #图灵机器人(http://www.tuling123.com/) 实名后的用户每天免费可用 100 条。
   turing_conf:
@@ -76,19 +74,14 @@ alarm_info:
       alarm_timed:
         - "00:15"
         - "22:55"
-        - "21:20"
-        - "19:40"
-        - "20:00"
-        - "21:30"
-        - "16:29"
-        - "16:30"
+        - "23:38"
       is_tomorrow: False # 是否发送明日信息（如天气，星座，万年历）
       #女友所在城市，用于发送天气。（可空）
       city_name: '北京'
       # 此城市的 pm2.5 值。
-      air_quality_city: '桂林'
+      air_quality_city: '北京'
       # 格言渠道（1 : ONE●一个，2 : 词霸（每日英语，双语）3: 土味情话 4 : 一言，5：笑话，6 民国情书,7彩虹屁)(可空)
-      dictum_channel: 3
+      dictum_channel: 6
       # 从哪天开始勾搭的（可空），配合 start_date_msg 使用。
       start_date: '2013-1-16'
       # 自定义方案（可空）， {}表示用于占位，代表天数，与 start_date 一起使用。单填无意义
@@ -104,15 +97,15 @@ alarm_info:
 
     #  如果你需要另一套方案，如下面复制即可
     #  如不需要，则删除或注解下面所有的数据
-    - group_name: 'EverydayWechat 交流1群'
-      wechat_name: '贴心小秘书'
-      city_name: '漳州'
-      start_date: '2011-11-11'
-      start_date_msg: '分手后的第{}天'
-      dictum_channel: 4
-      sweet_words: '名字写在水上的人'
-      alarm_timed: "23:02"
-      is_tomorrow: True
+    # - group_name: 'EverydayWechat 交流1群'
+    #   wechat_name: '贴心小秘书'
+    #   city_name: '漳州'
+    #   start_date: '2011-11-11'
+    #   start_date_msg: '分手后的第{}天'
+    #   dictum_channel: 4
+    #   sweet_words: '名字写在水上的人'
+    #   alarm_timed: "23:02"
+    #   is_tomorrow: True
 #---------------------------------------定时提醒功能设置--------------------------------------end
 
 
