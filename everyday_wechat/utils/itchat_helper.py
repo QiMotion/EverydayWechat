@@ -30,9 +30,16 @@ def init_wechat_config():
     # 从config copy ，用于保存新的接口内容。
     myset = config.copy()
     print('=' * 80)
+
+    base_wechat_info = itchat.search_friends() # 获取此微信号的基础信息
+    wechat_nick_name = base_wechat_info['NickName']  # 获取此微信号的昵称
+    wechat_uuid = base_wechat_info['UserName']  # 获取此微信号的uuid
+    myset['wechat_nick_name'] = wechat_nick_name
+    myset['wechat_uuid'] = wechat_uuid
+
     # start---------------------------处理自动回复好友---------------------------start
     reply = myset.get('auto_reply_info')
-    if reply.get('is_auto_reply'):
+    if reply is not None and reply.get('is_auto_reply'):
         if reply.get('is_auto_reply_all'):
             auto_reply_list_key = 'auto_reply_black_list'
             auto_reply_list_uuid_name = 'auto_reply_black_uuids'
@@ -59,7 +66,7 @@ def init_wechat_config():
 
     # start ----------------------------------- 群功能初始化 ----------------------------------- start
     helper = myset.get('group_helper_conf')
-    if helper.get('is_open'):
+    if helper is not None and helper.get('is_open'):
         if helper.get('is_all', False):
             group_list_key = 'group_name_black_list'
             group_list_uuid_name = 'group_black_uuids'
@@ -81,7 +88,7 @@ def init_wechat_config():
 
     alarm = myset.get('alarm_info')
     alarm_dict = {}
-    if alarm.get('is_alarm'):
+    if alarm is not None and alarm.get('is_alarm'):
         for gi in alarm.get('girlfriend_infos'):
             ats = gi.get('alarm_timed')
             if not ats:
@@ -183,6 +190,20 @@ def get_friend(wechat_name, update=False):
     return friends[0]
 
 
+def get_mps(mp_name, update=False):
+    """
+    根据公众号的名称获取用户数据
+    :param mp_name: str 用户名
+    :param update: bool 强制更新用户数据
+    :return: obj 单个公众号信息
+    """
+    if update: itchat.get_mps(update=True)
+    if not mp_name: return None
+    mps = itchat.search_mps(name=mp_name)
+    if not mps: return None
+    # mpuuid = mps[0]['UserName'] 公众号的uuid
+    return mps[0]
+
 # import pysnooper
 # @pysnooper.snoop()
 def log_all_config():
@@ -266,6 +287,8 @@ def log_all_config():
                 print('已开启垃圾分类查询功能，具体使用方法请输入：“help” 查看。')
             if helper.get('is_moviebox'):
                 print('已开启票房查询功能，具体使用方法请输入：“help” 查看。')
+            if helper.get('is_air_quality'):
+                print('已开启空气质量查询功能，具体使用方法请输入：“help” 查看。')
 
     print('=' * 80)
 
