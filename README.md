@@ -1,4 +1,4 @@
-![python_vesion](https://img.shields.io/badge/Python-3.5%2B-green.svg)   [![itchat_vesion](https://img.shields.io/badge/Itchat-1.3.10-brightgreen.svg)](https://github.com/littlecodersh/ItChat)   [![codebeat badge](https://codebeat.co/badges/0953014f-dbd3-41f4-bacd-60018e7d5065)](https://codebeat.co/projects/github-com-sfyc23-everydaywechat-master)   [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a278078ba9a14e22bd86740b0807a78e)](https://www.codacy.com/app/sfyc23/EverydayWechat?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sfyc23/EverydayWechat&amp;utm_campaign=Badge_Grade)   [![MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/sfyc23/EverydayWechat/blob/master/LICENSE)               [![weibo](https://img.shields.io/badge/weibo-@sfyc23-red.svg)](https://www.weibo.com/sfyc23)  [![GitHub issues](https://img.shields.io/github/issues/sfyc23/EverydayWechat.svg)](https://github.com/sfyc23/EverydayWechat/issues)  [![GitHub contributors](https://img.shields.io/github/contributors/sfyc23/EverydayWechat.svg)](https://github.com/sfyc23/EverydayWechat/graphs/contributors)  [![微信群](http://vlog.sfyc23.xyz/wechat_everyday/wxgroup_logo.png?imageView2/0/w/60/h/20)](#微信交流群)  
+![python_vesion](https://img.shields.io/badge/Python-3.5%2B-green.svg)   [![itchat_vesion](https://img.shields.io/badge/Itchat-1.3.10-brightgreen.svg)](https://github.com/littlecodersh/ItChat)   [![codebeat badge](https://codebeat.co/badges/0953014f-dbd3-41f4-bacd-60018e7d5065)](https://codebeat.co/projects/github-com-sfyc23-everydaywechat-master)   [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a278078ba9a14e22bd86740b0807a78e)](https://www.codacy.com/app/sfyc23/EverydayWechat?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sfyc23/EverydayWechat&amp;utm_campaign=Badge_Grade)   [![MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/sfyc23/EverydayWechat/blob/master/LICENSE)               [![weibo](https://img.shields.io/badge/weibo-@sfyc23-red.svg)](https://www.weibo.com/sfyc23)  [![GitHub issues](https://img.shields.io/github/issues/sfyc23/EverydayWechat.svg)](https://github.com/sfyc23/EverydayWechat/issues)  [![GitHub contributors](https://img.shields.io/github/contributors/sfyc23/EverydayWechat.svg)](https://github.com/sfyc23/EverydayWechat/graphs/contributors)  [![微信群](http://vlog.sfyc.ltd/wechat_everyday/wxgroup_logo.png?imageView2/0/w/60/h/20)](#微信交流群)  
  
 [EverydayWechat](https://github.com/sfyc23/EverydayWechat) 是基于 Python3 与 [Itchat](https://github.com/littlecodersh/ItChat) 的微信小工具。    
 可以定时给朋友或者群聊发送每日天气、提醒、每日一句，也可以智能自动回复好友信息。还有群助手功能，让你在好友群中装 X。
@@ -9,7 +9,8 @@
 **本项目依赖于网页版微信进行开发，如登录不了，则无法使用此项目；且无任何解决办法。**    
 网页版微信地址：<https://wx.qq.com/>。  
 
-
+在北京地区求一份 Python & Android 的工作岗位。  
+加微信：[地址](https://raw.githubusercontent.com/sfyc23/image/master/vlog/20190614125724.png)。
 
 [版本更新日志](https://github.com/sfyc23/EverydayWechat/blob/master/hostory.md)
 
@@ -231,6 +232,7 @@ sweet_words: '你脚下的蚂蚁'
 | -------- | -------------- | ---------- |---------- |
 | wechat_name | '老婆' | 选填 | 好友名：可填多人。好友微信昵称或者备注名（不能输入微信号）|
 | alarm_timed | '9：30' | 必填 | 定时时间，可填多个 |
+| alarm_jitter | 300 | 可空 | 定时时间的前后300秒内随机发送 |
 | group_name | '交流群' | 选填 | 群聊名称，可填多个。必须要把需要的群聊保存到通讯录。|
 | is_tomorrow | True | 可空 | 是否发送明日信息（如天气，星座，万年历）。|
 | city_name | '成都' | 可空 | 城市名：朋友所在城市，用于发送天气。 |
@@ -380,7 +382,7 @@ python run.py
 
 捐助方法如下：
 
-![](http://vlog.sfyc23.xyz/wechat_everyday/donation_wechat.png?imageView2/0/w/300/h/300)![](http://vlog.sfyc23.xyz/wechat_everyday/donation_alipay.png?imageView2/0/w/300/h/300)
+![](http://vlog.sfyc.ltd/wechat_everyday/donation_wechat.png?imageView2/0/w/300/h/300)![](http://vlog.sfyc.ltd/wechat_everyday/donation_alipay.png?imageView2/0/w/300/h/300)
 
 ## LICENSE
 [MIT License](https://github.com/sfyc23/EverydayWechat/blob/master/LICENSE)

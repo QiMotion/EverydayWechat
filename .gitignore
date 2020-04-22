@@ -3,3 +3,4 @@ __pycache__
 .history
 itchat.pkl
 QR.png
+venv/
